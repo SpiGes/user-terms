@@ -1,6 +1,6 @@
 # Nutzungsbedingungen der Plattform SpiGes
 
-Dieses Dokument beschreibt Ihre Verantwortlichkeiten und Pflichten als Nutzer der SpiGes-Erhebungsplattform. Bei Fragen zu diesen Nutzungsbedingungen wenden Sie sich bitte an <SpiGes@bfs.admin.ch>. Indem Sie auf « Akzeptieren » klicken, bestätigen Sie, dass Sie diese
+Dieses Dokument beschreibt Ihre Verantwortlichkeiten und Pflichten als Nutzer der SpiGes-Erhebungsplattform. Bei Fragen zu diesen Nutzungsbedingungen wenden Sie sich bitte an <SpiGes@bfs.admin.ch>. Indem Sie auf «Akzeptieren» klicken, bestätigen Sie, dass Sie diese
 Bedingungen gelesen haben und ihnen zustimmen.
 
 1. <u>Datenschutz</u>  
@@ -16,7 +16,7 @@ Bedingungen gelesen haben und ihnen zustimmen.
     benötige</u>  
     Als **Benutzer eines Standortes oder eines Spitalunternehmens**, verpflichte ich mich, die verantwortliche Person meines Kantons (KT_Superuser) unverzüglich per E-Mail zu informieren, wenn ich meinen Zugang nicht mehr benötige (z.B. infolge eines Arbeitgeberwechsels).  
 
-    Als **Angestellter einer kantonalen Verwaltung** verpflichte ich mich,die für meinen Kanton zuständige Person (KT_Superuser) unverzüglich per E-Mail zu informieren, wenn ich meinen Zugang nicht mehr benötige (z.B. infolge eines Arbeitgeberwechsels).  
+    Als **Angestellter einer kantonalen Verwaltung** verpflichte ich mich, die für meinen Kanton zuständige Person (KT_Superuser) unverzüglich per E-Mail zu informieren, wenn ich meinen Zugang nicht mehr benötige (z.B. infolge eines Arbeitgeberwechsels).  
 
     Als **Benutzer mit einem Profil, das den Download der definitiven KVG-Daten ermöglicht** (vom BFS erstellte Profile mit einem Profilnamen, der mit "EMPF\_" beginnt), verpflichte ich mich das BFS (<SpiGes@bfs.admin.ch>) unverzüglich zu informieren, wenn ich meinen Zugang nicht mehr benötige (z.B. infolge eines Arbeitgeberwechsels).
 
