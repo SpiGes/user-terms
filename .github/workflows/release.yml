@@ -1,0 +1,88 @@
+name: Create Release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  compute_new_git_tag:
+    runs-on: ubuntu-latest
+    outputs:
+      NEW_RELEASE_VERSION: ${{ steps.get_new_tag.outputs.new_release_version }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get latest tag and compute new tag
+        id: get_new_tag
+        run: |
+          # Get the last tag in the form vX
+          LATEST_TAG=$(git tag --list "v*" | sort -V | tail -n 1)
+
+          # If no tag exists, initialze a new one as v1
+          if [ -z "$LATEST_TAG" ]; then
+            NEW_TAG="v1"
+          else
+            # Extract the number and increment it (v1 -> v2 -> v3 ...)
+            TAG_NUMBER=$(echo $LATEST_TAG | sed 's/v//')
+            NEW_TAG="v$((TAG_NUMBER + 1))"
+          fi
+
+          echo "Latest tag: $LATEST_TAG"
+          echo "New tag: $NEW_TAG"
+
+          echo "new_release_version=$NEW_TAG" >> $GITHUB_ENV
+      
+  create-release:
+    needs: compute_new_git_tag
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create Release
+        id: create_release
+        env:
+          RELEASE_VERSION: ${{ needs.compute_new_git_tag.outputs.new_release_version }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Creating release version: $RELEASE_VERSION"
+          gh release create "$RELEASE_VERSION" --title "$RELEASE_VERSION" --notes "Automated release for version $RELEASE_VERSION" --draft
+
+  upload-file:
+    needs: [create-release, compute_new_git_tag]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Upload user terms files to Release
+        env:
+          RELEASE_VERSION: ${{ needs.compute_new_git_tag.outputs.new_release_version }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Uploading user terms files to release $RELEASE_VERSION"
+          gh release upload "$RELEASE_VERSION" *.md --clobber
+
+  publish-release:
+    needs: [upload-file, compute_new_git_tag]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Publish Release
+        env:
+          RELEASE_VERSION: ${{ needs.compute_new_git_tag.outputs.new_release_version }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Publishing release version: $RELEASE_VERSION"
+          gh release edit "$RELEASE_VERSION" --draft=false
