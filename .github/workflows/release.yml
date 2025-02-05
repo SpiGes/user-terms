@@ -33,7 +33,7 @@ jobs:
           echo "Latest tag: $LATEST_TAG"
           echo "New tag: $NEW_TAG"
 
-          echo "new_release_version=$NEW_TAG" >> $GITHUB_ENV
+          echo "new_release_version=$NEW_TAG" >> $GITHUB_OUTPUT
       
   create-release:
     needs: compute_new_git_tag
